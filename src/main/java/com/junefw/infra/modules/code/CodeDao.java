@@ -20,4 +20,8 @@ public class CodeDao {
 	public List<Code> selectList() {
 		return sqlSession.selectList(namespace + ".selectList", "");
 	}
+	
+	public int insert(Code dto) {
+		return sqlSession.insert(namespace + ".insert", dto);
+	}
 }

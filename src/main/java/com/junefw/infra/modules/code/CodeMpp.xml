@@ -20,13 +20,11 @@
 	</select>
 	
 	<insert id="insert">
-			insert into infrMember(
-				ifmmId
-				,ifmmName
-				,ifmmDelNy
-			) values (
-				#{ifmmId}
-				,#{ifmmName}
+			INSERT INTO infrCodeGroup(
+				ifcgName
+				, ifcgDelNy
+			) VALUES (
+				#{ifcgName}
 				,0
 			)
 	</insert>
