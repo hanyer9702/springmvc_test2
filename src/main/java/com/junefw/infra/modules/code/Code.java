@@ -6,6 +6,7 @@ public class Code {
 	private String ifcgSeq;
 	private String ifcgName;
 	private Integer ifcgDelNy;
+	private String ifcgChangeName;
 //------------
 	public String getIfcgSeq() {
 		return ifcgSeq;
@@ -25,4 +26,11 @@ public class Code {
 	public void setIfcgDelNy(Integer ifcgDelNy) {
 		this.ifcgDelNy = ifcgDelNy;
 	}
+	public String getIfcgChangeName() {
+		return ifcgChangeName;
+	}
+	public void setIfcgChangeName(String ifcgChangeName) {
+		this.ifcgChangeName = ifcgChangeName;
+	}
+	
 }

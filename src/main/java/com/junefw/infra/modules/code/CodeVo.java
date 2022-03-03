@@ -17,12 +17,5 @@ public class CodeVo {
 		this.ifcgSeq = ifcgSeq;
 	}
 
-	public String getIfcgChangeName() {
-		return ifcgChangeName;
-	}
-
-	public void setIfcgChangeName(String ifcgChangeName) {
-		this.ifcgChangeName = ifcgChangeName;
-	}
-
+	
 }

@@ -29,7 +29,11 @@ public class CodeDao {
 		return sqlSession.selectOne(namespace + ".selectOne", vo);
 	}
 	
-	public Code update(CodeVo vo) {
-		return sqlSession.selectOne(namespace + ".update", vo);
+	public Code selectOne(Code dto) {
+		return sqlSession.selectOne(namespace + ".selectOne", dto);
+	}
+	
+	public int update(Code dto) {
+		return sqlSession.update(namespace + ".update", dto);
 	}
 }
