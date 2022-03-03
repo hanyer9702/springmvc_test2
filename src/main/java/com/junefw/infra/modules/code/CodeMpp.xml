@@ -28,4 +28,26 @@
 				,0
 			)
 	</insert>
+	
+	<select id="selectOne" resultMap="resultMapObj">
+			SELECT
+				a.ifcgSeq
+				, a.ifcgName
+				, a.ifcgDelNy
+			FROM 
+				rb.infrcodegroup a
+			WHERE 1=1
+				AND ifcgSeq = #{ifcgSeq}
+	</select>
+	
+	<update id="update">
+			UPDATE
+				rb.infrcodegroup a
+			SET
+				a.ifcgName = #{ifcgChangeName}
+			WHERE 1=1
+				AND ifcgSeq = #{ifcgSeq}
+				
+			
+	</update>
 </mapper>

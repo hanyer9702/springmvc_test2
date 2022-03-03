@@ -18,4 +18,10 @@
 		
 		</c:forEach>
 	</c:otherwise>
-</c:choose>	 
+</c:choose>
+
+<form method="post" action="codeGroupUpdt">
+	<input type="text" name="ifcgSeq" placeholder="기존아디이">
+	<input type="text" name="ifcgChangeName" placeholder="바꿀이름">
+	<input type="submit" value="제출">
+</form>
