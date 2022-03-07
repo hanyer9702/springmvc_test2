@@ -5,7 +5,10 @@ public class CodeVo {
 	//VO
 
 	private String ifcgSeq;
-	private String ifcgChangeName;
+	
+//	code
+	
+	private String ifcdSeq;
 	
 	//--------------------------
 
@@ -17,5 +20,12 @@ public class CodeVo {
 		this.ifcgSeq = ifcgSeq;
 	}
 
-	
+//	-----------------------
+	public String getIfcdSeq() {
+		return ifcdSeq;
+	}
+
+	public void setIfcdSeq(String ifcdSeq) {
+		this.ifcdSeq = ifcdSeq;
+	}
 }

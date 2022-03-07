@@ -47,7 +47,58 @@
 				a.ifcgName = #{ifcgChangeName}
 			WHERE 1=1
 				AND ifcgSeq = #{ifcgSeq}
-				
-			
+	</update>
+	
+	<update id="update2">
+			UPDATE
+				rb.infrcodegroup
+			SET 
+				ifcgName = #{ifcgName}
+			WHERE 1=1
+				AND ifcgSeq = #{ifcgSeq}
+	</update>
+	
+	<!-- code -->
+	
+	<select id="selectCodeList" resultMap="resultMapObj">
+			SELECT
+				a.ifcdSeq
+				, a.ifcdName
+				, a.ifcdDelNy
+				, (select ifcgName from infrCodeGroup where a.ifcgSeq = infrCodeGroup.ifcgSeq) as ifcgName
+			FROM 
+				rb.infrcode a
+			WHERE 1=1
+				AND ifcdDelNy = 0
+	</select>
+	
+	<select id="selectCodeOne" resultMap="resultMapObj">
+			SELECT
+				a.ifcdSeq
+				, a.ifcdName
+				, a.ifcdDelNy
+			FROM 
+				rb.infrcode a
+			WHERE 1=1
+				AND ifcdSeq = #{ifcdSeq}
+	</select>
+	<insert id="insertCode">
+			INSERT INTO infrCode(
+				ifcdName
+				, ifcdDelNy
+				, ifcgSeq
+			) VALUES (
+				#{ifcdName}
+				,0
+				,#{ifcgSeq}
+			)
+	</insert>
+	<update id="updateCode">
+			UPDATE
+				rb.infrcode
+			SET 
+				ifcdName = #{ifcdName}
+			WHERE 1=1
+				AND ifcdSeq = #{ifcdSeq}
 	</update>
 </mapper>

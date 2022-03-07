@@ -6,4 +6,6 @@
 <%@ taglib prefix="rb" uri="http://www.springframework.org/tags" %>
 
 
-<c:out value="${rt.ifcgSeq}"/> | <c:out value="${rt.ifcgName}"/> | <c:out value="${rt.ifcgDelNy}"/> <br>
+<c:out value="${rt.ifcdSeq}"/> | <c:out value="${rt.ifcdName}"/> | <c:out value="${rt.ifcdDelNy}"/> <br>
+
+<a href="/infra/code/codeForm2?ifcdSeq=<c:out value="${rt.ifcdSeq}"/>">수정</a>
