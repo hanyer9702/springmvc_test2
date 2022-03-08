@@ -5,24 +5,19 @@
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
 <%@ taglib prefix="rb" uri="http://www.springframework.org/tags" %>
 
-<c:choose>
-	<c:when test="${fn:length(list) eq 0}">
-		<tr>
-			<td class="text-center" colspan="9">There is no data!</td>
-		</tr>	
-	</c:when>
-	<c:otherwise>
+<form method="post" action="codeInst">
+	<select id="ifcgSeq" name="ifcgSeq">
 		<c:forEach items="${list}" var="item" varStatus="status">	
-		
-		<c:out value="${item.ifcgSeq}"/> | <a href="/infra/code/codeGroupView?ifcgSeq=${item.ifcgSeq}"><c:out value="${item.ifcgName}"/></a> | <c:out value="${item.ifcgDelNy}"/> <br>
+	
+		<option value="${item.ifcgSeq}"><c:out value="${item.ifcgSeq}"/> | <c:out value="${item.ifcgName}"/></option>
 		
 		</c:forEach>
-	</c:otherwise>
-</c:choose>	 
+		
+	
+	</select>
 
 
-<form method="post" action="codeInst">
 	<input type="text" name="ifcdName" placeholder="아이디">
-	<input type="text" name="ifcgSeq" placeholder="시퀀스">
+	<!-- <input type="text" name="ifcgSeq" placeholder="시퀀스"> -->
 	<input type="submit" value="제출">
 </form>
