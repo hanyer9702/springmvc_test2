@@ -16,7 +16,23 @@
 			FROM 
 				rb.infrcodegroup a
 			WHERE 1=1
+				<choose>
+					<when test="shIfcgDelNy == 1">AND ifcgDelNy = 1</when>
+					<when test="shIfcgDelNy == 0">AND ifcgDelNy = 0</when>
+				</choose>
+				<if test="shIfcgName != null and !shIfcgName.equals('')"> AND ifcgName LIKE concat('%',#{shIfcgName},'%')</if>
+	</select>
+	
+	<select id="searchList" resultMap="resultMapObj">
+			SELECT
+				a.ifcgSeq
+				, a.ifcgName
+				, a.ifcgDelNy
+			FROM 
+				rb.infrcodegroup a
+			WHERE 1=1
 				AND ifcgDelNy = 0
+				AND ifcgName = #{shIfcgName}
 	</select>
 	
 	<insert id="insert">

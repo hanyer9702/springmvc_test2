@@ -14,9 +14,9 @@ public class CodeController {
 	CodeServiceImpl service;
 	
 	@RequestMapping(value = "/code/codeGroupList")
-	public String codeGroupList(Model model) throws Exception {
+	public String codeGroupList(CodeVo vo, Model model) throws Exception {
 
-		List<Code> list = service.selectList();
+		List<Code> list = service.selectList(vo);
 		model.addAttribute("list", list);
 
 		return "code/codeGroupList";
@@ -34,7 +34,7 @@ public class CodeController {
 //		입력 실행
 		service.insert(dto);
 		
-		return "";
+		return "redirect:/code/codeGroupList";
 	}
 	
 	@RequestMapping(value = "/code/codeGroupView")
@@ -54,10 +54,7 @@ public class CodeController {
 		
 		service.update(dto);
 		
-		Code rt = service.selectOne(dto);
-		model.addAttribute("rt", rt);
-		
-		return "code/codeGroupUpdt";
+		return "redirect:/code/codeGroupView?ifcgSeq=" + dto.getIfcgSeq();
 	}
 	
 	@RequestMapping(value = "/code/codeGroupForm2")
@@ -122,9 +119,9 @@ public class CodeController {
 		return "code/codeView";
 	}
 	@RequestMapping(value = "/code/codeForm")
-	public String codeForm(Model model) throws Exception {
+	public String codeForm(CodeVo vo, Model model) throws Exception {
 		
-		List<Code> list = service.selectList();
+		List<Code> list = service.selectList(vo);
 		model.addAttribute("list", list);
 		
 		return "code/codeForm";

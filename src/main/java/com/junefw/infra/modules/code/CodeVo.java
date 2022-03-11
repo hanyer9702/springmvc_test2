@@ -6,6 +6,10 @@ public class CodeVo {
 
 	private String ifcgSeq;
 	
+	// search
+	private String shIfcgName;
+	private String shIfcgDelNy;
+	
 //	code
 	
 	private String ifcdSeq;
@@ -20,7 +24,23 @@ public class CodeVo {
 		this.ifcgSeq = ifcgSeq;
 	}
 
-//	-----------------------
+	public String getShIfcgName() {
+		return shIfcgName;
+	}
+
+	public void setShIfcgName(String shIfcgName) {
+		this.shIfcgName = shIfcgName;
+	}
+	
+	public String getShIfcgDelNy() {
+		return shIfcgDelNy;
+	}
+
+	public void setShIfcgDelNy(String shIfcgDelNy) {
+		this.shIfcgDelNy = shIfcgDelNy;
+	}
+
+	//	-----------------------
 	public String getIfcdSeq() {
 		return ifcdSeq;
 	}
