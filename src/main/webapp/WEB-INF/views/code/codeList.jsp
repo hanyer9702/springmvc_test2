@@ -5,6 +5,22 @@
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
 <%@ taglib prefix="rb" uri="http://www.springframework.org/tags" %>
 
+<form id="" name="" method="get" action="codeList">
+<select name="shIfcdDelNy">
+	<option value="2">::삭제여부::
+	<option value="1">Y
+	<option value="0">N
+</select>
+<select name="shIfcgSeq">
+	<option value="">::코드그룹::
+	<c:forEach items="${list2}" var="item" varStatus="status">
+		<option value="${item.ifcgSeq}" <c:if test="${param.shIfcgSeq eq item.ifcgSeq}">selected</c:if>> <c:out value="${item.ifcgName}"/></option>
+	</c:forEach>
+</select>
+
+회원이름 : <input type="text" name="shIfcdName">
+<input type="submit" name="search">
+<br>
 <c:choose>
 	<c:when test="${fn:length(list) eq 0}">
 		<tr>
@@ -19,3 +35,4 @@
 		</c:forEach>
 	</c:otherwise>
 </c:choose>	 
+</form>

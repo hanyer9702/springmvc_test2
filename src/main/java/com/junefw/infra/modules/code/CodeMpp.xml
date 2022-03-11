@@ -85,7 +85,13 @@
 			FROM 
 				rb.infrcode a
 			WHERE 1=1
-				AND ifcdDelNy = 0
+				<!-- AND ifcdDelNy = 0 -->
+				<choose>
+					<when test="shIfcdDelNy == 1">AND ifcdDelNy = 1</when>
+					<when test="shIfcdDelNy == 0">AND ifcdDelNy = 0</when>
+				</choose>
+				<if test="shIfcgSeq != null and !shIfcgSeq.equals('')"> AND ifcgSeq = #{shIfcgSeq}</if>
+				<if test="shIfcdName != null and !shIfcdName.equals('')"> AND ifcdName LIKE concat('%',#{shIfcdName},'%')</if>
 	</select>
 	
 	<select id="selectCodeOne" resultMap="resultMapObj">

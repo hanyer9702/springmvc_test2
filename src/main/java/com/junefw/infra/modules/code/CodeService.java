@@ -13,7 +13,7 @@ public interface CodeService {
 	
 //	code------------------
 	
-	public List<Code> selectCodeList() throws Exception; 
+	public List<Code> selectCodeList(CodeVo vo) throws Exception; 
 	public Code selectCodeOne(CodeVo vo) throws Exception;
 	public int insertCode(Code dto) throws Exception;
 	public int updateCode(Code dto) throws Exception;

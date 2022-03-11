@@ -2,17 +2,23 @@ package com.junefw.infra.modules.code;
 
 public class CodeVo {
 	
-	//VO
+	//codegroup VO
 
 	private String ifcgSeq;
 	
-	// search
+	//codegroup search
 	private String shIfcgName;
 	private String shIfcgDelNy;
 	
 //	code
 	
 	private String ifcdSeq;
+	
+//	code search
+	
+	private String shIfcdName;
+	private String shIfcdDelNy;
+	private String shIfcgSeq;
 	
 	//--------------------------
 
@@ -47,5 +53,29 @@ public class CodeVo {
 
 	public void setIfcdSeq(String ifcdSeq) {
 		this.ifcdSeq = ifcdSeq;
+	}
+
+	public String getShIfcdName() {
+		return shIfcdName;
+	}
+
+	public void setShIfcdName(String shIfcdName) {
+		this.shIfcdName = shIfcdName;
+	}
+
+	public String getShIfcdDelNy() {
+		return shIfcdDelNy;
+	}
+
+	public void setShIfcdDelNy(String shIfcdDelNy) {
+		this.shIfcdDelNy = shIfcdDelNy;
+	}
+
+	public String getShIfcgSeq() {
+		return shIfcgSeq;
+	}
+
+	public void setShIfcgSeq(String shIfcgSeq) {
+		this.shIfcgSeq = shIfcgSeq;
 	}
 }

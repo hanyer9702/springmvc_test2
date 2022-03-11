@@ -43,8 +43,8 @@ public class CodeDao {
 	
 //	---------------------code
 	
-	public List<Code> selectCodeList() {
-		return sqlSession.selectList(namespace + ".selectCodeList", "");
+	public List<Code> selectCodeList(CodeVo vo) {
+		return sqlSession.selectList(namespace + ".selectCodeList", vo);
 	}
 	public Code selectCodeOne(CodeVo vo) {
 		return sqlSession.selectOne(namespace + ".selectCodeOne", vo);

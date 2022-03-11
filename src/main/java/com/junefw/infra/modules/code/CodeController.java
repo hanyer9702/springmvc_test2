@@ -99,10 +99,13 @@ public class CodeController {
 //	code
 	
 	@RequestMapping(value = "/code/codeList")
-	public String codeList(Model model) throws Exception {
+	public String codeList(CodeVo vo, Model model) throws Exception {
 
-		List<Code> list = service.selectCodeList();
+		List<Code> list = service.selectCodeList(vo);
 		model.addAttribute("list", list);
+		
+		List<Code> list2 = service.selectList(vo);
+		model.addAttribute("list2", list2);
 
 		return "code/codeList";
 	}
