@@ -12,6 +12,7 @@
 			SELECT
 				a.ifcgSeq
 				, a.ifcgName
+				, a.ifcgNameEng
 				, a.ifcgDelNy
 			FROM 
 				rb.infrcodegroup a
@@ -21,6 +22,10 @@
 					<when test="shIfcgDelNy == 0">AND ifcgDelNy = 0</when>
 				</choose>
 				<if test="shIfcgName != null and !shIfcgName.equals('')"> AND ifcgName LIKE concat('%',#{shIfcgName},'%')</if>
+				<choose>
+					<when test="shOption == 1">AND ifcgName LIKE concat('%',#{shValue},'%')</when>
+					<when test="shOption == 2">AND ifcgNameEng LIKE concat('%',#{shValue},'%')</when>
+				</choose>
 	</select>
 	
 	<select id="searchList" resultMap="resultMapObj">

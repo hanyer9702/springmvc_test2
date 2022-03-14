@@ -12,8 +12,15 @@
 	<option value="1">Y
 	<option value="0">N
 </select>
-
+||
 회원이름 : <input type="text" name="shIfcgName">
+||
+<select name="shOption">
+	<option value="">::검색구분::
+	<option value="1">한글
+	<option value="2">영문
+</select>
+<input type="text" name="shValue">
 <input type="submit" name="search">
 <br>
 <c:choose>
@@ -25,7 +32,7 @@
 	<c:otherwise>
 		<c:forEach items="${list}" var="item" varStatus="status">	
 		
-		<c:out value="${item.ifcgSeq}"/> | <a href="/infra/code/codeGroupView?ifcgSeq=${item.ifcgSeq}"><c:out value="${item.ifcgName}"/></a> | <c:out value="${item.ifcgDelNy}"/> <br>
+		<c:out value="${item.ifcgSeq}"/> | <a href="/infra/code/codeGroupView?ifcgSeq=${item.ifcgSeq}"><c:out value="${item.ifcgName}"/></a> | <c:out value="${item.ifcgNameEng}"/> |<c:out value="${item.ifcgDelNy}"/> <br>
 		
 		</c:forEach>
 	</c:otherwise>

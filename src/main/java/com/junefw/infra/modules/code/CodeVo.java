@@ -20,6 +20,10 @@ public class CodeVo {
 	private String shIfcdDelNy;
 	private String shIfcgSeq;
 	
+//	common
+	private String shOption;
+	private String shValue;
+	
 	//--------------------------
 
 	public String getIfcgSeq() {
@@ -78,4 +82,21 @@ public class CodeVo {
 	public void setShIfcgSeq(String shIfcgSeq) {
 		this.shIfcgSeq = shIfcgSeq;
 	}
+
+	public String getShOption() {
+		return shOption;
+	}
+
+	public void setShOption(String shOption) {
+		this.shOption = shOption;
+	}
+
+	public String getShValue() {
+		return shValue;
+	}
+
+	public void setShValue(String shValue) {
+		this.shValue = shValue;
+	}
+	
 }
