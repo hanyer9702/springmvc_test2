@@ -7,125 +7,136 @@
 <mapper namespace="com.junefw.infra.modules.code.CodeMpp">	<!-- 지금 파일 지정 -->
 
     <resultMap id="resultMapObj" type="com.junefw.infra.modules.code.Code"></resultMap> <!-- 결과 객체 저장 -->
+    
+    <sql id="selectCommon">
+    	FROM 
+			rb.infrcodegroup a
+		WHERE 1=1
+			<choose>
+				<when test="shIfcgDelNy == 1">AND ifcgDelNy = 1</when>
+				<when test="shIfcgDelNy == 0">AND ifcgDelNy = 0</when>
+			</choose>
+			<if test="shIfcgName != null and !shIfcgName.equals('')"> AND ifcgName LIKE concat('%',#{shIfcgName},'%')</if>
+			<choose>
+				<when test="shOption == 1">AND ifcgName LIKE concat('%',#{shValue},'%')</when>
+				<when test="shOption == 2">AND ifcgNameEng LIKE concat('%',#{shValue},'%')</when>
+			</choose>
+    </sql>
+    
+    <select id="selectOneCount" resultType="Integer">
+    	SELECT
+			count(*)
+		<include refid="selectCommon" />
+    </select>
 
 	<select id="selectList" resultMap="resultMapObj">
-			SELECT
-				a.ifcgSeq
-				, a.ifcgName
-				, a.ifcgNameEng
-				, a.ifcgDelNy
-			FROM 
-				rb.infrcodegroup a
-			WHERE 1=1
-				<choose>
-					<when test="shIfcgDelNy == 1">AND ifcgDelNy = 1</when>
-					<when test="shIfcgDelNy == 0">AND ifcgDelNy = 0</when>
-				</choose>
-				<if test="shIfcgName != null and !shIfcgName.equals('')"> AND ifcgName LIKE concat('%',#{shIfcgName},'%')</if>
-				<choose>
-					<when test="shOption == 1">AND ifcgName LIKE concat('%',#{shValue},'%')</when>
-					<when test="shOption == 2">AND ifcgNameEng LIKE concat('%',#{shValue},'%')</when>
-				</choose>
+		SELECT
+			a.ifcgSeq
+			, a.ifcgName
+			, a.ifcgNameEng
+			, a.ifcgDelNy
+		<include refid="selectCommon" />
+		limit #{startRnumForMysql}, #{rowNumToShow}
 	</select>
 	
 	<select id="searchList" resultMap="resultMapObj">
-			SELECT
-				a.ifcgSeq
-				, a.ifcgName
-				, a.ifcgDelNy
-			FROM 
-				rb.infrcodegroup a
-			WHERE 1=1
-				AND ifcgDelNy = 0
-				AND ifcgName = #{shIfcgName}
+		SELECT
+			a.ifcgSeq
+			, a.ifcgName
+			, a.ifcgDelNy
+		FROM 
+			rb.infrcodegroup a
+		WHERE 1=1
+			AND ifcgDelNy = 0
+			AND ifcgName = #{shIfcgName}
 	</select>
 	
 	<insert id="insert">
-			INSERT INTO infrCodeGroup(
-				ifcgName
-				, ifcgDelNy
-			) VALUES (
-				#{ifcgName}
-				,0
-			)
+		INSERT INTO infrCodeGroup(
+			ifcgName
+			, ifcgDelNy
+		) VALUES (
+			#{ifcgName}
+			,0
+		)
 	</insert>
 	
 	<select id="selectOne" resultMap="resultMapObj">
-			SELECT
-				a.ifcgSeq
-				, a.ifcgName
-				, a.ifcgDelNy
-			FROM 
-				rb.infrcodegroup a
-			WHERE 1=1
-				AND ifcgSeq = #{ifcgSeq}
+		SELECT
+			a.ifcgSeq
+			, a.ifcgName
+			, a.ifcgDelNy
+		FROM 
+			rb.infrcodegroup a
+		WHERE 1=1
+			AND ifcgSeq = #{ifcgSeq}
 	</select>
 	
 	<update id="update">
-			UPDATE
-				rb.infrcodegroup a
-			SET
-				a.ifcgName = #{ifcgChangeName}
-			WHERE 1=1
-				AND ifcgSeq = #{ifcgSeq}
+		UPDATE
+			rb.infrcodegroup a
+		SET
+			a.ifcgName = #{ifcgChangeName}
+		WHERE 1=1
+			AND ifcgSeq = #{ifcgSeq}
 	</update>
 	
 	<update id="update2">
-			UPDATE
-				rb.infrcodegroup
-			SET 
-				ifcgName = #{ifcgName}
-			WHERE 1=1
-				AND ifcgSeq = #{ifcgSeq}
+		UPDATE
+			rb.infrcodegroup
+		SET 
+			ifcgName = #{ifcgName}
+		WHERE 1=1
+			AND ifcgSeq = #{ifcgSeq}
 	</update>
 	
 	<!-- code -->
 	
 	<select id="selectCodeList" resultMap="resultMapObj">
-			SELECT
-				a.ifcdSeq
-				, a.ifcdName
-				, a.ifcdDelNy
-				, (select ifcgName from infrCodeGroup where a.ifcgSeq = infrCodeGroup.ifcgSeq) as ifcgName
-			FROM 
-				rb.infrcode a
-			WHERE 1=1
-				<!-- AND ifcdDelNy = 0 -->
-				<choose>
-					<when test="shIfcdDelNy == 1">AND ifcdDelNy = 1</when>
-					<when test="shIfcdDelNy == 0">AND ifcdDelNy = 0</when>
-				</choose>
-				<if test="shIfcgSeq != null and !shIfcgSeq.equals('')"> AND ifcgSeq = #{shIfcgSeq}</if>
-				<if test="shIfcdName != null and !shIfcdName.equals('')"> AND ifcdName LIKE concat('%',#{shIfcdName},'%')</if>
+		SELECT
+			a.ifcdSeq
+			, a.ifcdName
+			, a.ifcdDelNy
+			, (select ifcgName from infrCodeGroup where a.ifcgSeq = infrCodeGroup.ifcgSeq) as ifcgName
+		FROM 
+			rb.infrcode a
+		WHERE 1=1
+			<!-- AND ifcdDelNy = 0 -->
+			<choose>
+				<when test="shIfcdDelNy == 1">AND ifcdDelNy = 1</when>
+				<when test="shIfcdDelNy == 0">AND ifcdDelNy = 0</when>
+			</choose>
+			<if test="shIfcgSeq != null and !shIfcgSeq.equals('')"> AND ifcgSeq = #{shIfcgSeq}</if>
+			<if test="shIfcdName != null and !shIfcdName.equals('')"> AND ifcdName LIKE concat('%',#{shIfcdName},'%')</if>
 	</select>
 	
 	<select id="selectCodeOne" resultMap="resultMapObj">
-			SELECT
-				a.ifcdSeq
-				, a.ifcdName
-				, a.ifcdDelNy
-			FROM 
-				rb.infrcode a
-			WHERE 1=1
-				AND ifcdSeq = #{ifcdSeq}
+		SELECT
+			a.ifcdSeq
+			, a.ifcdName
+			, a.ifcdDelNy
+		FROM 
+			rb.infrcode a
+		WHERE 1=1
+			AND ifcdSeq = #{ifcdSeq}
 	</select>
 	<insert id="insertCode">
-			INSERT INTO infrCode(
-				ifcdName
-				, ifcdDelNy
-				, ifcgSeq
-			) VALUES (
-				#{ifcdName}
-				,0
-				,#{ifcgSeq}
-			)
+		INSERT INTO infrCode(
+			ifcdName
+			, ifcdDelNy
+			, ifcgSeq
+		) VALUES (
+			#{ifcdName}
+			,0
+			,#{ifcgSeq}
+		)
 	</insert>
 	<update id="updateCode">
-			UPDATE
-				rb.infrcode
-			SET 
-				ifcdName = #{ifcdName}
-			WHERE 1=1
-				AND ifcdSeq = #{ifcdSeq}
+		UPDATE
+			rb.infrcode
+		SET 
+			ifcdName = #{ifcdName}
+		WHERE 1=1
+			AND ifcdSeq = #{ifcdSeq}
 	</update>
 </mapper>
