@@ -9,21 +9,22 @@
 
 <form id="" name="" method="get" action="codeGroupList">
 
-<select name="shIfcgDelNy">
+<select name="shIfcgDelNy" id="shIfcgDelNy">
 	<option value="">::삭제여부::
 	<option value="1">Y
 	<option value="0">N
 </select>
 ||
-회원이름 : <input type="text" name="shIfcgName">
+회원이름 : <input type="text" name="shIfcgName" id="shIfcgName">
 ||
-<select name="shOption">
+<select name="shOption" id="shOption">
 	<option value="">::검색구분::
 	<option value="1">한글
 	<option value="2">영문
 </select>
-<input type="text" name="shValue">
-<input type="submit" name="search">
+<input type="text" name="shValue" id="shValue">
+<input type="submit" id="btnSubmit" name="search">
+<input type="submit" id="btnSubmit2" name="search">
 <br>
 <c:choose>
 	<c:when test="${fn:length(list) eq 0}">
@@ -62,3 +63,36 @@
 	</c:if>
   </ul>
 </nav>
+
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script> 
+<script src="/infra/resources/js/validation.js"></script>
+
+<script type="text/javascript">
+	$("#btnSubmit").on("click", function(){
+		
+		/* if($("#shIfcgName").val() == "" || $("#shIfcgName").val()  == null){
+			alert("null이다.");
+			$("#shIfcgName").focus();
+		} */
+		
+		if(!checkNull($("#shIfcgName"), $("#shIfcgName").val(), "shIfcgName null이다.")) return false;
+		if(!checkNull($("#shValue"), $("#shValue").val(), "shValue null이다.")) return false;
+		/* checkNull($("#shIfcgName"), $("#shIfcgName").val(), "shIfcgName null이다.");
+		checkNull($("#shOption"), $("#shOption").val(), "shOption null이다.");
+		checkNull($("#shValue"), $("#shValue").val(), "shValue null이다."); */
+		
+		/* alert($("#shOption").val()); */
+		
+		/* alert("hello javascript!!!");
+		confirm("진짜 삭제 하시겠습니까?") */
+		/* alert($("#shIfcgDelNy").val());		//jquery 방식
+		alert($("#shIfcgName").val());		//jquery 방식
+		alert($("#shOption").val());		//jquery 방식
+		alert($("#shValue").val());		//jquery 방식 */
+		/* alert(document.getElementById("shIfcgName").value);		//javascript 방식 */
+	})
+	$("#btnSubmit2").on("click", function(){
+		
+		alert("버튼 눌럿당");
+	})
+</script>
