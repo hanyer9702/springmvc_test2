@@ -7,6 +7,8 @@ import org.springframework.stereotype.Service;
 
 @Service
 public class CodeServiceImpl implements CodeService{
+	
+	//insert, update, delete
 
 	@Autowired
 	CodeDao dao;
@@ -23,7 +25,9 @@ public class CodeServiceImpl implements CodeService{
 
 	@Override
 	public int insert(Code dto) throws Exception {
-		return dao.insert(dto);
+		dao.insert(dto);			//ifcgName, ifcdName
+		dao.insertCode(dto);		// ifcgName, ifcdName, ifcdSeq
+		return 1;
 	}
 
 	@Override

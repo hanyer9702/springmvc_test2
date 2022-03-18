@@ -59,6 +59,9 @@
 			#{ifcgName}
 			,0
 		)
+		<selectKey resultType="string" keyProperty="ifcgSeq" order="AFTER">
+			SELECT last_insert_id()
+		</selectKey>
 	</insert>
 	
 	<select id="selectOne" resultMap="resultMapObj">
