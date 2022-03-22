@@ -7,8 +7,11 @@
 
 
 <form method="post" action="codeGroupInst">
-	<input type="text" name="ifcgName" placeholder="코드그룹">
-	<input type="text" name="ifcdName" placeholder="코드">
+	<input type="text" name="ifcgName" id="ifcgName" placeholder="코드그룹">
+	<input type="text" name="ifcdName" id="ifcdName" placeholder="코드">
+	<input type="hidden" name="thisPage" id="thisPage" value="${vo.thisPage }">
+	<input type="hidden" name="shOption" id="shOption" value="${vo.shOption }">
+	<input type="hidden" name="shValue" id="shValue" value="${vo.shValue }">
 	<input type="submit" id="btnSubmit" name="btnSubmit" value="제출">
 </form>
 

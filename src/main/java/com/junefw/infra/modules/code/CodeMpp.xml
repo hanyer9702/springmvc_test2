@@ -36,6 +36,7 @@
 			, a.ifcgNameEng
 			, a.ifcgDelNy
 		<include refid="selectCommon" />
+		ORDER BY ifcgSeq DESC 
 		limit #{startRnumForMysql}, #{rowNumToShow}
 	</select>
 	

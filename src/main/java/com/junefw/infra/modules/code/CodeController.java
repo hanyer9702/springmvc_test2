@@ -36,22 +36,23 @@ public class CodeController {
 	}
 		
 	@RequestMapping(value = "/code/codeGroupForm")
-	public String codeGroupForm() throws Exception {
+	public String codeGroupForm(@ModelAttribute("vo") CodeVo vo) throws Exception {
 		
 		return "code/codeGroupForm";
 	}
 	
 	@RequestMapping(value = "/code/codeGroupInst")
-	public String codeGroupInst(Code dto) throws Exception {
+	public String codeGroupInst(@ModelAttribute("vo") CodeVo vo, Code dto) throws Exception {
 		
 //		입력 실행
 		service.insert(dto);
 		
-		return "redirect:/code/codeGroupList";
+//		return "redirect:/code/codeGroupList";
+		return "redirect:/code/codeGroupView?ifcgSeq=" + dto.getIfcgSeq() + "&thisPage=" + vo.getThisPage() + "&shOption=" + vo.getShOption() + "&shValue=" + vo.getShValue();
 	}
 	
 	@RequestMapping(value = "/code/codeGroupView")
-	public String codeGroupView(CodeVo vo, Model model) throws Exception {
+	public String codeGroupView(@ModelAttribute("vo") CodeVo vo, Model model) throws Exception {
 		
 		// 디비까지 가서 한 건의 데이터 값을 가지고 온다
 		Code rt = service.selectOne(vo);
@@ -63,15 +64,15 @@ public class CodeController {
 	}
 	
 	@RequestMapping(value = "/code/codeGroupUpdt")
-	public String codeGroupUpdt(Code dto, Model model) throws Exception {
+	public String codeGroupUpdt(@ModelAttribute("vo") CodeVo vo, Code dto, Model model) throws Exception {
 		
 		service.update(dto);
 		
-		return "redirect:/code/codeGroupView?ifcgSeq=" + dto.getIfcgSeq();
+		return "redirect:/code/codeGroupView?ifcgSeq=" + dto.getIfcgSeq() + "&shOption=" + vo.getShOption() + "&shValue=" + vo.getShValue();
 	}
 	
 	@RequestMapping(value = "/code/codeGroupForm2")
-	public String codeGroupForm2(CodeVo vo, Model model) throws Exception {
+	public String codeGroupForm2(@ModelAttribute("vo") CodeVo vo, Model model) throws Exception {
 		
 		Code rt = service.selectOne(vo);
 		
@@ -81,11 +82,11 @@ public class CodeController {
 	}
 	
 	@RequestMapping(value = "/code/codeGroupUpdt2")
-	public String codeGroupUpdt2(Code dto) throws Exception {
+	public String codeGroupUpdt2(@ModelAttribute("vo") CodeVo vo, Code dto) throws Exception {
 		
 		service.update2(dto);
 		
-		return "code/codeGroupUpdt2";
+		return "redirect:/code/codeGroupView?ifcgSeq=" + dto.getIfcgSeq() + "&thisPage=" + vo.getThisPage() + "&shOption=" + vo.getShOption() + "&shValue=" + vo.getShValue();
 	}
 	
 //	@RequestMapping(value = "/code/codeGroupForm3")
