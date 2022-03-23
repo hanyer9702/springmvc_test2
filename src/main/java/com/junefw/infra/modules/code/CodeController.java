@@ -7,6 +7,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 @Controller
 public class CodeController {
@@ -34,6 +35,13 @@ public class CodeController {
 		
 		return "code/codeGroupList";
 	}
+	
+	public String makeQueryString(CodeVo vo) {
+		String tmp =  "&thisPage=" + vo.getThisPage() 
+					+ "&shOption=" + vo.getShOption() 
+					+ "&shValue=" + vo.getShValue();
+		return tmp;
+	}
 		
 	@RequestMapping(value = "/code/codeGroupForm")
 	public String codeGroupForm(@ModelAttribute("vo") CodeVo vo) throws Exception {
@@ -42,13 +50,18 @@ public class CodeController {
 	}
 	
 	@RequestMapping(value = "/code/codeGroupInst")
-	public String codeGroupInst(@ModelAttribute("vo") CodeVo vo, Code dto) throws Exception {
+	public String codeGroupInst(@ModelAttribute("vo") CodeVo vo, Code dto, RedirectAttributes redirectAttributes) throws Exception {
 		
 //		입력 실행
 		service.insert(dto);
 		
-//		return "redirect:/code/codeGroupList";
-		return "redirect:/code/codeGroupView?ifcgSeq=" + dto.getIfcgSeq() + "&thisPage=" + vo.getThisPage() + "&shOption=" + vo.getShOption() + "&shValue=" + vo.getShValue();
+		redirectAttributes.addAttribute("ifcgSeq", dto.getIfcdSeq());	//get
+		redirectAttributes.addAttribute("thisPage", vo.getThisPage());	//get
+		redirectAttributes.addAttribute("shOption", vo.getShOption());	//get
+		redirectAttributes.addAttribute("shValue", vo.getShValue());	//get
+		
+		return "redirect:/code/codeGroupList";
+//		return "redirect:/code/codeGroupView?ifcgSeq=" + dto.getIfcgSeq() + makeQueryString(vo);
 	}
 	
 	@RequestMapping(value = "/code/codeGroupView")
@@ -86,7 +99,37 @@ public class CodeController {
 		
 		service.update2(dto);
 		
-		return "redirect:/code/codeGroupView?ifcgSeq=" + dto.getIfcgSeq() + "&thisPage=" + vo.getThisPage() + "&shOption=" + vo.getShOption() + "&shValue=" + vo.getShValue();
+		return "redirect:/code/codeGroupView?ifcgSeq=" + dto.getIfcgSeq() + makeQueryString(vo);
+	}
+	
+	@RequestMapping(value = "/code/codeGroupDelY")
+	public String codeGroupDelY(@ModelAttribute("vo") CodeVo vo, Code dto, RedirectAttributes redirectAttributes) throws Exception {
+		
+//		입력 실행
+		service.delete(vo);
+		
+		redirectAttributes.addAttribute("ifcgSeq", dto.getIfcdSeq());	//get
+		redirectAttributes.addAttribute("thisPage", vo.getThisPage());	//get
+		redirectAttributes.addAttribute("shOption", vo.getShOption());	//get
+		redirectAttributes.addAttribute("shValue", vo.getShValue());	//get
+		
+		return "redirect:/code/codeGroupList";
+//		return "redirect:/code/codeGroupView?ifcgSeq=" + dto.getIfcgSeq() + makeQueryString(vo);
+	}
+	
+	@RequestMapping(value = "/code/codeGroupDelN")
+	public String codeGroupDelN(@ModelAttribute("vo") CodeVo vo, Code dto, RedirectAttributes redirectAttributes) throws Exception {
+		
+//		입력 실행
+		service.updateDelete(vo);
+		
+		redirectAttributes.addAttribute("ifcgSeq", dto.getIfcdSeq());	//get
+		redirectAttributes.addAttribute("thisPage", vo.getThisPage());	//get
+		redirectAttributes.addAttribute("shOption", vo.getShOption());	//get
+		redirectAttributes.addAttribute("shValue", vo.getShValue());	//get
+		
+		return "redirect:/code/codeGroupList";
+//		return "redirect:/code/codeGroupView?ifcgSeq=" + dto.getIfcgSeq() + makeQueryString(vo);
 	}
 	
 //	@RequestMapping(value = "/code/codeGroupForm3")

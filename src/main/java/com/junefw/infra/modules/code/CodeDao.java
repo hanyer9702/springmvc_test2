@@ -45,6 +45,13 @@ public class CodeDao {
 		return sqlSession.update(namespace + ".update2", dto);
 	}
 	
+	public int updateDelete(CodeVo vo) {
+		return sqlSession.update(namespace + ".updateDelete", vo);
+	}
+	public int delete(CodeVo vo) {
+		return sqlSession.delete(namespace + ".delete", vo);
+	}
+	
 //	---------------------code
 	
 	public List<Code> selectCodeList(CodeVo vo) {
