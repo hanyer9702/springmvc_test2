@@ -25,6 +25,10 @@ public class CodeDao {
 		return sqlSession.selectList(namespace + ".selectList", vo);
 	}
 	
+	public List<Code> selectAllList(CodeVo vo) {
+		return sqlSession.selectList(namespace + ".selectAllList", vo);
+	}
+	
 	public int insert(Code dto) {
 		return sqlSession.insert(namespace + ".insert", dto);
 	}
@@ -54,6 +58,9 @@ public class CodeDao {
 	
 //	---------------------code
 	
+	public int selectCodeOneCount(CodeVo vo) {
+		return sqlSession.selectOne(namespace + ".selectCodeOneCount", vo);
+	}
 	public List<Code> selectCodeList(CodeVo vo) {
 		return sqlSession.selectList(namespace + ".selectCodeList", vo);
 	}
@@ -65,5 +72,9 @@ public class CodeDao {
 	}
 	public int updateCode(Code dto) {
 		return sqlSession.update(namespace + ".updateCode", dto);
+	}
+	
+	public List<Code> selectListForCache() {
+		return sqlSession.selectList(namespace + ".selectListForCache", "");
 	}
 }

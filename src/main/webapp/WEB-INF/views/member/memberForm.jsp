@@ -11,3 +11,4 @@
 	<input type="text" name="ifmmName" placeholder="이름">
 	<input type="submit" value="제출">
 </form>
+

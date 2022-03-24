@@ -40,6 +40,16 @@
 		limit #{startRnumForMysql}, #{rowNumToShow}
 	</select>
 	
+	<select id="selectAllList" resultMap="resultMapObj">
+		SELECT
+			a.ifcgSeq
+			, a.ifcgName
+			, a.ifcgNameEng
+			, a.ifcgDelNy
+		FROM 
+			rb.infrcodegroup a
+	</select>
+	
 	<select id="searchList" resultMap="resultMapObj">
 		SELECT
 			a.ifcgSeq
@@ -113,13 +123,8 @@
 	
 	<!-- code -->
 	
-	<select id="selectCodeList" resultMap="resultMapObj">
-		SELECT
-			a.ifcdSeq
-			, a.ifcdName
-			, a.ifcdDelNy
-			, (select ifcgName from infrCodeGroup where a.ifcgSeq = infrCodeGroup.ifcgSeq) as ifcgName
-		FROM 
+	 <sql id="selectCodeCommon">
+    	FROM 
 			rb.infrcode a
 		WHERE 1=1
 			<!-- AND ifcdDelNy = 0 -->
@@ -129,6 +134,22 @@
 			</choose>
 			<if test="shIfcgSeq != null and !shIfcgSeq.equals('')"> AND ifcgSeq = #{shIfcgSeq}</if>
 			<if test="shIfcdName != null and !shIfcdName.equals('')"> AND ifcdName LIKE concat('%',#{shIfcdName},'%')</if>
+    </sql>
+	
+	<select id="selectCodeOneCount" resultType="Integer">
+    	SELECT
+			count(*)
+		<include refid="selectCodeCommon" />
+    </select>
+	
+	<select id="selectCodeList" resultMap="resultMapObj">
+		SELECT
+			a.ifcdSeq
+			, a.ifcdName
+			, a.ifcdDelNy
+			, (select ifcgName from infrCodeGroup where a.ifcgSeq = infrCodeGroup.ifcgSeq) as ifcgName
+		<include refid="selectCodeCommon" />
+		limit #{startRnumForMysql}, #{rowNumToShow}
 	</select>
 	
 	<select id="selectCodeOne" resultMap="resultMapObj">
@@ -160,4 +181,16 @@
 		WHERE 1=1
 			AND ifcdSeq = #{ifcdSeq}
 	</update>
+	
+	<select id="selectListForCache" resultMap="resultMapObj">
+		SELECT
+			a.ifcdSeq
+			, a.ifcdName
+			, a.ifcdDelNy
+		FROM
+			rb.infrcode a
+		WHERE 1=1
+			AND ifcdDelNy = 0
+			AND ifcdUseNy = 1
+	</select>
 </mapper>

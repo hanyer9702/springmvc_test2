@@ -13,6 +13,7 @@ public class CodeVo {
 //	code
 	
 	private String ifcdSeq;
+	private String ifcdUseNy;
 	
 //	code search
 	
@@ -112,6 +113,17 @@ public class CodeVo {
 	public void setShIfcgDelNy(String shIfcgDelNy) {
 		this.shIfcgDelNy = shIfcgDelNy;
 	}
+	
+
+	public String getIfcdUseNy() {
+		return ifcdUseNy;
+	}
+
+
+	public void setIfcdUseNy(String ifcdUseNy) {
+		this.ifcdUseNy = ifcdUseNy;
+	}
+
 
 	//	-----------------------
 	public String getIfcdSeq() {

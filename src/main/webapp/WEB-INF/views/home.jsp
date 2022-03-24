@@ -8,6 +8,13 @@
 <h1>
 	Hello world!  
 </h1>
+<form method="post" action="home">
+
+<input type="text">
+<input type="submit">
+
+</form>
+ 
 
 <P>  The time on the server is ${serverTime}. </P>
 </body>

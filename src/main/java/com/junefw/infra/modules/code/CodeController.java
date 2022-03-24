@@ -6,7 +6,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 @Controller
@@ -155,20 +157,38 @@ public class CodeController {
 //	-----------------------
 //	code
 	
-	@RequestMapping(value = "/code/codeList")
-	public String codeList(CodeVo vo, Model model) throws Exception {
-
-		List<Code> list = service.selectCodeList(vo);
-		model.addAttribute("list", list);
+//	@RequestMapping(value = "/code/codeList", method = {RequestMethod.POST, RequestMethod.GET}) 
+	@RequestMapping(value = "/code/codeList") 
+	public String codeList(@ModelAttribute("vo") CodeVo vo, Model model) throws Exception {
 		
-		List<Code> list2 = service.selectList(vo);
+		List<Code> list2 = service.selectAllList(vo);
 		model.addAttribute("list2", list2);
+		
+		int count = service.selectCodeOneCount(vo);
+		
+		vo.setParamsPaging(count);
+		
+		// count가 0이 아니면 list 가져오는 부분 수행 후 model 개체에 담기
+		if(count != 0) {
+			List<Code> list = service.selectCodeList(vo);
+			model.addAttribute("list", list);
+		} else {
+			// by pass
+		}
 
-		return "code/codeList";
+		return "/code/codeList";
 	}
 	
 	@RequestMapping(value = "/code/codeView")
-	public String codeView(CodeVo vo, Model model) throws Exception {
+	public String codeView(@ModelAttribute("vo") CodeVo vo, Model model) throws Exception {
+		
+		System.out.println("*********************************");
+		System.out.println(vo.getShIfcdDelNy());
+		System.out.println(vo.getShIfcdName());
+		System.out.println(vo.getThisPage());
+		System.out.println(vo.getIfcdSeq());
+		System.out.println("*********************************");
+		
 		
 		// 디비까지 가서 한 건의 데이터 값을 가지고 온다
 		Code rt = service.selectCodeOne(vo);
