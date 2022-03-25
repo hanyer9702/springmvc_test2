@@ -12,3 +12,9 @@
 	<input type="submit" value="제출">
 </form>
 
+<select class="form-select form-select-sm" id="kbmmGenderCd" name="kbmmGenderCd">
+	<option value="">::성별::</option>
+		<c:forEach items="${codeGender}" var="itemGender" varStatus="statusGender">
+			<option value="<c:out value="${itemGender.ifcdSeq}"/>" <c:if test="${item.kbmmGenderCd eq itemGender.ifcdOrder }">selected</c:if> ><c:out value="${itemGender.ifcdName}"/></option>	
+		</c:forEach> 
+</select>

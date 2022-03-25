@@ -186,7 +186,9 @@
 		SELECT
 			a.ifcdSeq
 			, a.ifcdName
+			, a.ifcdOrder
 			, a.ifcdDelNy
+			, a.ifcgSeq
 		FROM
 			rb.infrcode a
 		WHERE 1=1

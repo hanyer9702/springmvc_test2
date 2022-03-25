@@ -16,6 +16,7 @@ public class Code {
 	private String ifcdName;
 	private String ifcdUseNy;
 	private String ifcdDelNy;
+	private String ifcdOrder;
 	
 //	for cache
 	public static List<Code> cachedCodeArrayList = new ArrayList<Code>(); 
@@ -69,6 +70,12 @@ public class Code {
 	}
 	public void setIfcdUseNy(String ifcdUseNy) {
 		this.ifcdUseNy = ifcdUseNy;
+	}
+	public String getIfcdOrder() {
+		return ifcdOrder;
+	}
+	public void setIfcdOrder(String ifcdOrder) {
+		this.ifcdOrder = ifcdOrder;
 	}
 	
 	

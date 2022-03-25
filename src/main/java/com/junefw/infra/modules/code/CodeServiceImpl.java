@@ -98,17 +98,17 @@ public class CodeServiceImpl implements CodeService{
 
 	@PostConstruct
 	public void selectListForCache() throws Exception{
-		List<Code> codeLIstFromDb = (ArrayList<Code>) dao.selectListForCache();
+		List<Code> codeListFromDb = (ArrayList<Code>) dao.selectListForCache();
 		
 		Code.cachedCodeArrayList.clear();
-		Code.cachedCodeArrayList.addAll(codeLIstFromDb);
+		Code.cachedCodeArrayList.addAll(codeListFromDb);
 		System.out.println("cachedCodeArrayList: " + Code.cachedCodeArrayList.size() + " Checked!");		
 	}
 	
 	public static List<Code> selectListCachedCode(String ifcgSeq) throws Exception {
 		List<Code> rt = new ArrayList<Code>();
 		for(Code codeRow : Code.cachedCodeArrayList) {
-			if(codeRow.getIfcdSeq().equals(ifcgSeq)) {
+			if(codeRow.getIfcgSeq().equals(ifcgSeq)) {
 				rt.add(codeRow);
 			} else {
 				// by pass
