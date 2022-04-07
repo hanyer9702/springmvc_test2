@@ -1,6 +1,8 @@
 package com.junefw.infra.modules.code;
 
+import java.io.File;
 import java.util.List;
+import java.util.UUID;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -9,6 +11,7 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 @Controller
@@ -209,6 +212,23 @@ public class CodeController {
 	
 	@RequestMapping(value = "/code/codeInst")
 	public String codeInst(Code dto) throws Exception {
+		
+		MultipartFile multipartFile = dto.getFile();
+		
+		String fileName = multipartFile.getOriginalFilename();
+		String ext = fileName.substring(fileName.lastIndexOf(".") + 1);
+		String uuid = UUID.randomUUID().toString();
+		String uuidFileName = uuid + "." + ext;
+		
+		dto.setIfcdOriginalFileName(fileName);
+		dto.setIfcdUuidFileName(uuidFileName);
+		
+		
+		multipartFile.transferTo(new File("C:/factory/ws_sts_0413/springmvc_test2/src/main/webapp/resources/uploaded/" + uuidFileName));
+		
+		
+		
+		System.out.println("multipartFile:" + multipartFile.getOriginalFilename());
 		
 //		입력 실행
 		service.insertCode(dto);

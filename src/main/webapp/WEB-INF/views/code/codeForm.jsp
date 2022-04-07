@@ -7,7 +7,8 @@
 
 <link href="/infra/resources/common/jquery/jquery-ui-1.13.1.custom/jquery-ui.css" rel="stylesheet">
 
-<form method="get" action="codeInst">
+<!-- <form method="get" action="codeInst"> -->
+<form method="post" action="codeInst" enctype="multipart/form-data">
 	<select id="ifcgSeq" name="ifcgSeq">
 		<c:forEach items="${list}" var="item" varStatus="status">	
 	
@@ -21,6 +22,8 @@
 
 	<input type="text" name="ifcdName" placeholder="아이디">
 	<!-- <input type="text" name="ifcgSeq" placeholder="시퀀스"> -->
+	<input type="file" name="file">
+	<!-- <input type="file" name="file1"> -->
 	<input type="submit" value="제출">
 </form>
 

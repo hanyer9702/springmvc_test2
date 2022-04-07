@@ -80,6 +80,8 @@
 	                   
 	                    	                    
 						/* lat and lng from address s */
+						
+						
 	        			
 		        		// 주소-좌표 변환 객체를 생성
 		        		var geocoder = new daum.maps.services.Geocoder();
@@ -132,7 +134,7 @@
 	                // 커서를 상세주소 필드로 이동한다.
 	                document.getElementById("ifmaAddress2").focus();
 	                
-	                var map = new kakao.maps.Map(container, options);
+	                /* var map = new kakao.maps.Map(container, options); */
 	        		
 	            }
 	        }).open();

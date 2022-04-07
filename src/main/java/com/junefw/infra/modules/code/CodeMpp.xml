@@ -157,6 +157,8 @@
 			a.ifcdSeq
 			, a.ifcdName
 			, a.ifcdDelNy
+			, a.ifcdOriginalFileName
+			, a.ifcdUuidFileName
 		FROM 
 			rb.infrcode a
 		WHERE 1=1
@@ -167,10 +169,14 @@
 			ifcdName
 			, ifcdDelNy
 			, ifcgSeq
+			, ifcdOriginalFileName
+			, ifcdUuidFileName
 		) VALUES (
 			#{ifcdName}
 			,0
 			,#{ifcgSeq}
+			, #{ifcdOriginalFileName}
+			, #{ifcdUuidFileName}
 		)
 	</insert>
 	<update id="updateCode">
