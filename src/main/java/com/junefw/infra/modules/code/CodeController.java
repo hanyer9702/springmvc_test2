@@ -213,22 +213,22 @@ public class CodeController {
 	@RequestMapping(value = "/code/codeInst")
 	public String codeInst(Code dto) throws Exception {
 		
-		MultipartFile multipartFile = dto.getFile();
+//		 MultipartFile multipartFile = dto.getFile(); 
 		
-		String fileName = multipartFile.getOriginalFilename();
-		String ext = fileName.substring(fileName.lastIndexOf(".") + 1);
-		String uuid = UUID.randomUUID().toString();
-		String uuidFileName = uuid + "." + ext;
+//		String fileName = multipartFile.getOriginalFilename();
+//		String ext = fileName.substring(fileName.lastIndexOf(".") + 1);
+//		String uuid = UUID.randomUUID().toString();
+//		String uuidFileName = uuid + "." + ext;
+//		
+//		dto.setIfcdOriginalFileName(fileName);
+//		dto.setIfcdUuidFileName(uuidFileName);
+//		
+//		
+//		multipartFile.transferTo(new File("C:/factory/ws_sts_0413/springmvc_test2/src/main/webapp/resources/uploaded/" + uuidFileName));
 		
-		dto.setIfcdOriginalFileName(fileName);
-		dto.setIfcdUuidFileName(uuidFileName);
 		
 		
-		multipartFile.transferTo(new File("C:/factory/ws_sts_0413/springmvc_test2/src/main/webapp/resources/uploaded/" + uuidFileName));
-		
-		
-		
-		System.out.println("multipartFile:" + multipartFile.getOriginalFilename());
+//		System.out.println("multipartFile:" + multipartFile.getOriginalFilename());
 		
 //		입력 실행
 		service.insertCode(dto);

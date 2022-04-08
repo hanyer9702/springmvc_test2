@@ -14,7 +14,7 @@
 
 
 <c:out value="${rt.ifcdSeq}"/> | <c:out value="${rt.ifcdName}"/> | <c:out value="${rt.ifcdDelNy}"/> <br>
-<a href="/infra/resources/uploaded/<c:out value="${rt.ifcdUuidFileName}"/>">다운로드</a> <a href="/infra/resources/uploaded/<c:out value="${rt.ifcdOriginalFileName}"/>">다운로드2</a><img src = "/infra/resources/uploaded/<c:out value="${rt.ifcdUuidFileName}"/>"> <c:out value="${rt.ifcdOriginalFileName}"/>
+<a href="/infra/resources/uploaded/<c:out value="${rt.ifcdUuidFileName}"/>" download="<c:out value="${rt.ifcdOriginalFileName}"/>">다운로드</a> <a href="/infra/resources/uploaded/<c:out value="${rt.ifcdOriginalFileName}"/>">다운로드2</a><img src = "/infra/resources/uploaded/<c:out value="${rt.ifcdUuidFileName}"/>"> <c:out value="${rt.ifcdOriginalFileName}"/>
 
 
 <a href="javascript:goList()">목록</a>

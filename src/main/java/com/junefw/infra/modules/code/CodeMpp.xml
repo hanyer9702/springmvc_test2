@@ -178,6 +178,9 @@
 			, #{ifcdOriginalFileName}
 			, #{ifcdUuidFileName}
 		)
+		<selectKey resultType="string" keyProperty="ifcdSeq" order="AFTER">
+			SELECT last_insert_id()
+		</selectKey>
 	</insert>
 	<update id="updateCode">
 		UPDATE
@@ -201,4 +204,35 @@
 			AND ifcdDelNy = 0
 			AND ifcdUseNy = 1
 	</select>
+	
+	<!-- uploaded -->
+	
+	<insert id="insertUploaded">
+		INSERT INTO ${tableName}(
+			type
+			,defaultNy
+			,sort
+			,originalName
+			,uuidName
+			,ext
+			,size
+			,delNy
+			<!-- <include refid="Base.insertRegColumn" /> -->
+			,pseq
+		) VALUES (
+			#{type}
+			,#{defaultNy}
+			,#{sort}
+			,#{originalName}
+			,#{uuidName}
+			,#{ext}
+			,#{size}
+			,0
+			<!-- <include refid="Base.insertReqValue" /> -->
+			,#{pseq}
+		)
+	</insert>
+	
+	<!-- uploaded -->
+	
 </mapper>

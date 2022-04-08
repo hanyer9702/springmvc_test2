@@ -7,6 +7,9 @@ import javax.annotation.PostConstruct;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.web.multipart.MultipartFile;
+
+import com.junefw.infra.modules.common.util.UtilUpload;
 
 @Service
 public class CodeServiceImpl implements CodeService{
@@ -33,8 +36,10 @@ public class CodeServiceImpl implements CodeService{
 
 	@Override
 	public int insert(Code dto) throws Exception {
+		
 		dao.insert(dto);			//ifcgName, ifcdName
 		dao.insertCode(dto);		// ifcgName, ifcdName, ifcdSeq
+		
 		return 1;
 	}
 
@@ -88,7 +93,27 @@ public class CodeServiceImpl implements CodeService{
 
 	@Override
 	public int insertCode(Code dto) throws Exception {
-		return dao.insertCode(dto);
+		
+		dao.insertCode(dto);
+		
+		int j = 0;
+		
+		for(MultipartFile multipartFile : dto.getFile0()) {
+			String pathModule = this.getClass().getSimpleName().toString().toLowerCase().replace("serviceimpl", "");
+			UtilUpload.upload(multipartFile, pathModule, dto);
+			
+			dto.setTableName("infrMemberUploaded");
+			dto.setType(0);
+			dto.setDefaultNy(0);
+			dto.setSort(j);
+			dto.setDefaultNy(0);
+			dto.setPseq(dto.getIfcdSeq()); 
+			
+			dao.insertUploaded(dto);
+			j++;
+		}
+		
+		return 1;
 	}
 
 	@Override

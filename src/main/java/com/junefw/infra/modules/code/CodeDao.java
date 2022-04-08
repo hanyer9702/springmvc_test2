@@ -77,4 +77,9 @@ public class CodeDao {
 	public List<Code> selectListForCache() {
 		return sqlSession.selectList(namespace + ".selectListForCache", "");
 	}
+	
+//	uploaded
+	public int insertUploaded(Code dto) {
+		return sqlSession.insert(namespace + ".insertUploaded", dto);
+	}
 }
